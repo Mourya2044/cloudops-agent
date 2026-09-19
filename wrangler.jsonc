@@ -1,26 +1,52 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "agent-starter",
+  "name": "cloudops-agent",
   "main": "src/server.ts",
   "compatibility_date": "2026-06-11",
-  "compatibility_flags": ["nodejs_compat"],
-  "ai": { "binding": "AI", "remote": true },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "ai": {
+    "binding": "AI",
+    "remote": true
+  },
   "assets": {
     "directory": "./public",
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/agents/*", "/oauth/*"]
+    "run_worker_first": [
+      "/agents/*",
+      "/oauth/*",
+      "/api/*"
+    ]
+  },
+  "vars": {
+    "DATA_PROVIDER": "cloudflare"
   },
   "durable_objects": {
     "bindings": [
       {
         "class_name": "ChatAgent",
         "name": "ChatAgent"
+      },
+      {
+        "class_name": "CloudOpsAgent",
+        "name": "CloudOpsAgent"
       }
     ]
   },
+  "workflows": [
+    {
+      "name": "incident-investigation-workflow",
+      "binding": "INCIDENT_WORKFLOW",
+      "class_name": "IncidentInvestigationWorkflow"
+    }
+  ],
   "migrations": [
     {
-      "new_sqlite_classes": ["ChatAgent"],
+      "new_sqlite_classes": [
+        "ChatAgent",
+        "CloudOpsAgent"
+      ],
       "tag": "v1"
     }
   ]
