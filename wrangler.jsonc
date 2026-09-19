@@ -20,7 +20,8 @@
     ]
   },
   "vars": {
-    "DATA_PROVIDER": "cloudflare"
+    "DATA_PROVIDER": "cloudflare",
+    "CLOUDFLARE_ACCOUNT_ID": "ca005977cd512fecd0666d69786440f0"
   },
   "durable_objects": {
     "bindings": [
